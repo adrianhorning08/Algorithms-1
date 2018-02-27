@@ -4,13 +4,15 @@ class DynamicArray
   attr_reader :length
 
   def initialize
-    StaticArray.new
+    @store = StaticArray.new
     @length = 0
+    @capacity = 8
   end
 
   # O(1)
   def [](index)
     raise "index out of bounds" if index >= @length
+
   end
 
   # O(1)
