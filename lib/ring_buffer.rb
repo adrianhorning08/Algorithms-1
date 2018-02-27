@@ -72,13 +72,15 @@ class RingBuffer
   end
 
   def resize!
-    @capacity *= 2
-    new_store = StaticArray.new(@capacity)
+    new_store = StaticArray.new(@capacity * 2)
     i = 0
     while i < @length
-      new_store[i] = @store[i]
+      new_store[i] = @store[(i + @start_idx) % @capacity]
       i+=1
     end
+    @capacity *= 2
+    @start_idx = 0
     @store = new_store
   end
+
 end
